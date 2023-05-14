@@ -8,25 +8,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    Widget sectionNumber = Container(
-      width: 70,
-      height: 70,
-      decoration: const BoxDecoration(
-        color: Color.fromRGBO(0, 0, 0, 0.85),
-        shape: BoxShape.circle,
-      ),
-      child: const Center(
-        child: Text(
-          '#0.',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-
     Widget buttonSection =  Container(
       width: 180,
       height: 70,
@@ -115,30 +96,54 @@ class MyApp extends StatelessWidget {
           title: const Text('Programming basics 2'),
         ),
         body: ListView(
-          children: List.generate(3, (index) {
-            return Stack(
-              children: [
-                Image.asset(
-                  'images/lake.jpg',
-                  width: double.infinity,
-                  height: 270,
-                  fit: BoxFit.cover,
-                ),
-                Positioned(
-                  top: 16,
-                  left: 16,
-                  child: sectionNumber,
-                ),
-                Positioned(
-                  top: 16,
-                  right: 16,
-                  child: buttonSection,
-                ),
-                Positioned(
-                  bottom: 0,
-                  child: titleSection,
-                ),
-              ],
+          children: List.generate(5, (index) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Stack(
+                children: [
+                  Image.asset(
+                    'images/lake.jpg',
+                    width: double.infinity,
+                    height: 270,
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    top: 16,
+                    left: 16,
+                    child: Column(
+                      children: [
+                      Container(
+                        width: 70,
+                        height: 70,
+                        decoration: const BoxDecoration(
+                          color: Color.fromRGBO(0, 0, 0, 0.85),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '#$index.',
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    top: 16,
+                    right: 16,
+                    child: buttonSection,
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: titleSection,
+                  ),
+                ],
+              ),
             );
           }
           ),
