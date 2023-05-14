@@ -55,7 +55,6 @@ class MyApp extends StatelessWidget {
     );
 
     Widget titleSection = Container(
-      // width: double.infinity,
       height: 115,
       width: 398,
       decoration: BoxDecoration(
@@ -116,8 +115,8 @@ class MyApp extends StatelessWidget {
           title: const Text('Programming basics 2'),
         ),
         body: ListView(
-          children: [
-            Stack(
+          children: List.generate(3, (index) {
+            return Stack(
               children: [
                 Image.asset(
                   'images/lake.jpg',
@@ -140,8 +139,9 @@ class MyApp extends StatelessWidget {
                   child: titleSection,
                 ),
               ],
-            ),
-          ],
+            );
+          }
+          ),
         ),
       ),
     );
