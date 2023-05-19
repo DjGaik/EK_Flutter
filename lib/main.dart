@@ -13,20 +13,20 @@ class MyApp extends StatelessWidget {
       height: 70,
       alignment: Alignment.center,
       color: Colors.white.withOpacity(0.8),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildButtonColumn(
+          _BuildButtonColumn(
               Colors.blue,
               Icons.call,
               'CALL'
           ),
-          _buildButtonColumn(
+          _BuildButtonColumn(
               Colors.green,
               Icons.near_me,
               'ROUTE'
           ),
-          _buildButtonColumn(
+          _BuildButtonColumn(
               Colors.black,
               Icons.share,
               'SHARE'
@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
 
     Widget titleSection = Container(
       height: 115,
-      width: 398,
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.85),
         borderRadius: const BorderRadius.only(
@@ -95,64 +94,87 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Programming basics 2'),
         ),
-        body: ListView(
-          children: List.generate(5, (index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Stack(
-                children: [
-                  Image.asset(
-                    'images/lake.jpg',
-                    width: double.infinity,
-                    height: 270,
-                    fit: BoxFit.cover,
-                  ),
-                  Positioned(
-                    top: 16,
-                    left: 16,
-                    child: Column(
-                      children: [
-                      Container(
-                        width: 70,
-                        height: 70,
-                        decoration: const BoxDecoration(
-                          color: Color.fromRGBO(0, 0, 0, 0.85),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Text(
-                            '#$index.',
-                            style: const TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      ],
+        body: SafeArea(
+          child: ListView(
+            children: List.generate(5, (index) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      'images/lake.jpg',
+                      width: double.infinity,
+                      height: 270,
+                      fit: BoxFit.cover,
                     ),
-                  ),
-                  Positioned(
-                    top: 16,
-                    right: 16,
-                    child: buttonSection,
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    child: titleSection,
-                  ),
-                ],
-              ),
-            );
-          }
+
+                    Positioned(
+                      top: 16,
+                      left: 16,
+                      child: NewWidget(index),
+                    ),
+
+                    Positioned(
+                      top: 16,
+                      right: 16,
+                      child: buttonSection,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: titleSection,
+                    ),
+                  ],
+                ),
+              );
+            }
+            ),
           ),
         ),
       ),
     );
   }
+}
 
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
+class NewWidget extends StatelessWidget {
+  const NewWidget(this.index, {
+    Key? key,
+  }) : super(key: key);
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 70,
+      height: 70,
+      decoration: const BoxDecoration(
+        color: Color.fromRGBO(0, 0, 0, 0.85),
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(
+          '#${index.toString()}.',
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _BuildButtonColumn extends StatelessWidget {
+  const _BuildButtonColumn(this.color, this.icon, this.label, {Key? key})
+      : super(key: key);
+
+  final Color color;
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
